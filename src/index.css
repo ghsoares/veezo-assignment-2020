@@ -1,13 +1,133 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+html, body, #root {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.app {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #323033;
+}
+
+.top {
+    height: 32px;
+    background-color: #242125;
+}
+
+.center {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+}
+
+.bottom {
+    height: 48px;
+    background-color: #242125;
+}
+
+.sidebar {
+    width: 25%;
+    height: 100%;
+    background-color: #2b282c;
+}
+
+.filetree-filelist {
+    display: flex;
+    flex-direction: column;
+}
+
+.filetree-item {
+    text-align: left;
+    display: flex;
+    flex-direction: row;
+
+    background: none;
+    border: 0;
+    margin: 0;
+    outline: none;
+
+    color: #a1a1a1;
+
+    cursor: pointer;
+}
+
+.filetree-item:hover {
+    background-color: #03002b40;
+    color: #c0c0c0;
+}
+
+.filetree-item-filename {
+    white-space: nowrap;
+    overflow: hidden;
+    flex: 1;
+}
+
+.editor {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+
+.editor:not(.opened) {
+    justify-content: center;
+    align-items: center;
+}
+
+.editor-filename {
+    position: absolute;
+    bottom: 100%;
+    background-color: #323033;
+    color: white;
+    padding: 4px 16px;
+    border-radius: 8px 8px 0 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.file-close {
+    background: none;
+    border: 0;
+    outline: none;
+    display: inline-block;
+    color: white;
+    padding: 6px;
+    margin-left: 12px;
+    background-color: rgba(229, 143, 143, 0.3);
+    border-radius: 100%;
+    transition: background-color .1s ease-in-out;
+}
+
+.file-close:hover {
+    background-color: rgb(252, 112, 112);
+    cursor: pointer;
+}
+
+.file-close:active {
+    background-color: rgb(204, 79, 95);
+}
+
+.editor-lines {
+    width: 24px;
+}
+
+.editor > textarea {
+    flex: 1;
+    background: none;
+    border: 0;
+    border-left: 2px solid rgba(0, 0, 0, 0.15);
+    padding: 4px 12px;
+    color: white;
+    outline: none;
+}
+
+.empty-editor {
+    color: white;
+    text-align: center;
+    vertical-align: middle;
 }
