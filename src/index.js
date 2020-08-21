@@ -2,10 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import {ReactComponent as LoadingIcon} from './svg/loading.svg';
-import {getFiletree, saveFile} from './js/file-fetch';
+import {getFiletree, saveFile, deleteFile} from './js/file-fetch';
 import {TreeItem} from './js/filetree-components';
 import {Editor} from './js/editor';
-import {FaSave, FaMoon, FaSun} from 'react-icons/fa/index.esm';
+import {FaSave, FaMoon, FaSun, FaTrashAlt} from 'react-icons/fa/index.esm';
 
 // Main app component
 class App extends React.Component {
@@ -16,6 +16,7 @@ class App extends React.Component {
             treeLoaded: false,      // Status of the filetree
             tree: [],               // The filetree returned by the API
             saving: false,          // Status of the current file saving
+            deleting: false,        // Status of deleting the current file
             currentTheme: 'dark'    // Current app theme ('light' or 'dark')
         };
         this.editor = null;         // The Editor instanciated component
@@ -23,7 +24,7 @@ class App extends React.Component {
     }
     // Called after the component is inserted at the tree
     componentDidMount() {
-        // Get the filetree from the api (async)
+        // Get the filetree from the API (async)
         getFiletree().then(data => {
             // Set the new state after the data is returned from the server
             this.setState({
@@ -37,7 +38,7 @@ class App extends React.Component {
         this.editor.loadFile(contents);
         this.forceUpdate();
     }
-    // Called when needs to save the file (from the sae button or 'CTRL+S' shortcut)
+    // Called when needs to save the file (from the save button or 'CTRL+S' shortcut)
     onFileQuerySave(contents) {
         // If is not passed any parameter, saves the current file
         contents = contents ?? this.editor.state.currentFile;
@@ -55,6 +56,25 @@ class App extends React.Component {
             // Set this state to stop renderering the saving animation
             this.setState({
                 saving: false
+            });
+        });
+    }
+    // Called when needs to delete the file (from the delete button)
+    onFileQueryDelete() {
+        // Set this state to render the deleting animation
+        this.setState({
+            deleting: true
+        });
+        // Delete the file to the server (async), this doesn't truely delete the file, but
+        // the server returns OK code.
+        deleteFile(this.editor.state.currentFile.id)
+        .then(response => {
+            // Call the Editor component onFileClose function to update
+            // its state
+            this.editor.onFileClose();
+            // Set this state to stop renderering the deleting animation
+            this.setState({
+                deleting: false
             });
         });
     }
@@ -85,13 +105,16 @@ class App extends React.Component {
         if (this.state.treeLoaded) {
             // The save button, is disabled by default
             var saveBtn = (<button className="save" title="Save the current file (CTRL+S)" disabled><FaSave /></button>);
+            // The delete button, is disabled by default
+            var deleteBtn = (<button className="delete" title="Delete the current open file" disabled><FaTrashAlt /></button>);
             // Icon to show while saving the current opened file
             var savingIcon;
             // Button to switch between the themes
             var themeBtn;
-            // Change the save button when the current file is opened to a button not disabled
+            // Change the save and delete button when the current file is opened to a button not disabled
             if (this.editor && this.editor.state.currentFile !== null) {
                 saveBtn = (<button className="save" title="Save the current file (CTRL+S)" onClick={() => this.onFileQuerySave()}><FaSave /></button>);
+                deleteBtn = (<button className="delete" title="Delete the current open file" onClick={() => this.onFileQueryDelete()}><FaTrashAlt /></button>);
             }
             // Show the saving icon if saving
             if (this.state.saving) {
@@ -116,6 +139,7 @@ class App extends React.Component {
             return (
             <div className="app">
                 <div className="top">
+                    {deleteBtn}
                     {saveBtn}
                     {savingIcon}
                 </div>

@@ -50,8 +50,15 @@ class TreeItem extends React.Component {
                 this.props.onFileLoaded(contents);
                 // The current global loading TreeItem is now null, as finished loading
                 loadingComponent = null;
+                // Force render update to hide the loading animation
+                this.forceUpdate();
             });
         }
+    }
+    // Hack: the provided ReactJS React.Component.forceUpdate don't work in some cases,
+    // so this override function force a state update to force render (and force render for its childs)
+    forceUpdate() {
+        this.setState(this.state);
     }
     // Called when is needed to render the component
     render() {
