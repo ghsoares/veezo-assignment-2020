@@ -3,6 +3,81 @@ html, body, #root {
     height: 100%;
     margin: 0;
     padding: 0;
+    overflow: hidden;
+}
+
+body.dark {
+    --theme-default-font-color: white;
+    --theme-top-background-color: #232125;
+    --theme-sidebar-background-color: #2b282c;
+    --theme-fileitem-hover-background-color: #03002b40;
+    --theme-fileitem-currentfile-background-color: #0d032565;
+    --theme-fileitem-file-icons-color: #8ee8ff;
+    --theme-fileitem-filename-color: #9bb4d6;
+    --theme-editor-background-color: #323033;
+    --theme-editor-line-color: #ffffff36;
+    --theme-editor-font-family: Arial, Helvetica, sans-serif;
+    --theme-editor-line-height: 24px;
+    --theme-editor-selection-background-color: rgba(0, 0, 0, 0.4);
+    --theme-editor-scroll-background-color: rgba(255, 255, 255, 0.3);
+    --theme-save-button-color: rgb(112, 255, 148);
+    --theme-switcher-color: #ffee8e;
+}
+
+body.light {
+    --theme-default-font-color: #313131;
+    --theme-top-background-color: #dbdbdb;
+    --theme-sidebar-background-color: #cccccc;
+    --theme-fileitem-hover-background-color: #03002b40;
+    --theme-fileitem-currentfile-background-color: #0d032565;
+    --theme-fileitem-file-icons-color: #242424;
+    --theme-fileitem-filename-color: #424242;
+    --theme-editor-background-color: #f3f3f3;
+    --theme-editor-line-color: #00000080;
+    --theme-editor-font-family: Arial, Helvetica, sans-serif;
+    --theme-editor-line-height: 24px;
+    --theme-editor-selection-background-color: rgba(0, 0, 0, 0.4);
+    --theme-editor-scroll-background-color: rgba(0, 0, 0, 0.3);
+    --theme-save-button-color: rgb(45, 151, 71);
+    --theme-switcher-color: #313131;
+}
+
+.app-loading {
+    background-color: var(--theme-editor-background-color);
+    color: var(--theme-default-font-color);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.loading-circle {
+    width: 128px;
+    height: 128px;
+    border-radius: 100%;
+}
+
+.loading-circle > path {
+    stroke: var(--theme-default-font-color);
+    stroke-dasharray: 730;
+    stroke-linecap: round;
+    animation: app-loading 2s ease-in-out infinite;
+    transform-origin: center;
+    transform: rotate(-90deg);
+}
+
+@keyframes app-loading {
+    from {
+        stroke-dashoffset: 730;
+    }
+    50% {
+        stroke-dashoffset: 1460;
+    }
+    to {
+        stroke-dashoffset: 2190;
+    }
 }
 
 .app {
@@ -10,29 +85,77 @@ html, body, #root {
     height: 100%;
     display: flex;
     flex-direction: column;
-    background-color: #323033;
 }
 
 .top {
-    height: 32px;
-    background-color: #242125;
+    height: 48px;
+    background-color: var(--theme-top-background-color);
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+}
+
+.save {
+    display: block;
+    padding: 8px;
+    background: none;
+    border: 0;
+    color: var(--theme-save-button-color);
+    font-size: 32px;
+    height: 100%;
+    box-sizing: border-box;
+    opacity: .5;
+    outline: none;
+    transition: opacity .1s ease-in-out;
+}
+
+.save:disabled {
+    opacity: .25;
+}
+
+.save:not(:disabled) {
+    cursor: pointer;
+}
+
+.save:not(:disabled):hover {
+    opacity: 1;
+}
+
+.save:not(:disabled):active {
+    opacity: .75;
+}
+
+.saving-icon {
+    width: 24px;
+    height: 24px;
+    background-color: var(--theme-default-font-color);
+    margin-right: 16px;
+    animation: saving 1s ease-in-out infinite;
+}
+
+@keyframes saving {
+    0%, 50% {
+        transform: rotate(0deg);
+    }
+    80% {
+        transform: rotate(100deg);
+    }
+    100% {
+        transform: rotate(90deg);
+    }
 }
 
 .center {
     flex: 1;
     display: flex;
     flex-direction: row;
-}
-
-.bottom {
-    height: 48px;
-    background-color: #242125;
+    min-height: 0;
 }
 
 .sidebar {
     width: 25%;
     height: 100%;
-    background-color: #2b282c;
+    background-color: var(--theme-sidebar-background-color);
 }
 
 .filetree-filelist {
@@ -44,26 +167,65 @@ html, body, #root {
     text-align: left;
     display: flex;
     flex-direction: row;
+    align-items: center;
 
     background: none;
     border: 0;
     margin: 0;
     outline: none;
+    opacity: .75;
+    color: var(--theme-default-font-color);
 
-    color: #a1a1a1;
+    transition: opacity .1s ease-in-out, background-color .1s ease-in-out;
 
     cursor: pointer;
 }
 
 .filetree-item:hover {
-    background-color: #03002b40;
-    color: #c0c0c0;
+    background-color: var(--theme-fileitem-hover-background-color);
+    opacity: 1;
+}
+
+.filetree-item.currentfile {
+    background-color: var(--theme-fileitem-currentfile-background-color);
+}
+
+.filetree-item-icons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.filetree-item-icons.file {
+    color: var(--theme-fileitem-file-icons-color);
 }
 
 .filetree-item-filename {
     white-space: nowrap;
     overflow: hidden;
     flex: 1;
+    margin-left: 8px;
+    color: var(--theme-fileitem-filename-color);
+}
+
+.filetree-item-loading {
+    width: 16px;
+    height: 8px;
+    border-radius: 16px;
+
+    animation: filetree-item-loading-anim 1s infinite;
+}
+
+@keyframes filetree-item-loading-anim {
+    0% {
+        background-color: #fff;
+    }
+    50% {
+        background-color: rgba(255, 255, 255, 0.5);
+    }
+    100% {
+        background-color: #fff;
+    }
 }
 
 .editor {
@@ -71,6 +233,8 @@ html, body, #root {
     display: flex;
     flex-direction: row;
     position: relative;
+    background-color: var(--theme-editor-background-color);
+    padding: 16px;
 }
 
 .editor:not(.opened) {
@@ -81,8 +245,8 @@ html, body, #root {
 .editor-filename {
     position: absolute;
     bottom: 100%;
-    background-color: #323033;
-    color: white;
+    background-color: var(--theme-editor-background-color);
+    color: var(--theme-default-font-color);
     padding: 4px 16px;
     border-radius: 8px 8px 0 0;
     display: flex;
@@ -95,7 +259,6 @@ html, body, #root {
     border: 0;
     outline: none;
     display: inline-block;
-    color: white;
     padding: 6px;
     margin-left: 12px;
     background-color: rgba(229, 143, 143, 0.3);
@@ -112,22 +275,97 @@ html, body, #root {
     background-color: rgb(204, 79, 95);
 }
 
-.editor-lines {
-    width: 24px;
+.editor-contents {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    display: flex;
+    flex-direction: row;
+    scroll-behavior: smooth;
 }
 
-.editor > textarea {
+.editor-contents::-webkit-scrollbar {
+    width: 10px;
+}
+
+.editor-contents::-webkit-scrollbar-track {
+    background: none;
+}
+
+.editor-contents::-webkit-scrollbar-thumb {
+    background: var(--theme-editor-scroll-background-color);
+    opacity: .1;
+    border-radius: 10px;
+}
+
+.editor-lines {
+    margin-right: 18px;
+    display: flex;
+    flex-direction: column;
+    color: var(--theme-editor-line-color);
+    font-size: 16px;
+    font-family: var(--theme-editor-font-family);
+    line-height: var(--theme-editor-line-height);
+    height: fit-content;
+    min-width: 20px;
+}
+
+.editor-contents > textarea {
     flex: 1;
     background: none;
     border: 0;
-    border-left: 2px solid rgba(0, 0, 0, 0.15);
-    padding: 4px 12px;
-    color: white;
+    padding: 0;
+    resize: none;
+    color: var(--theme-default-font-color);
     outline: none;
+    font-size: 16px;
+    font-family: var(--theme-editor-font-family);
+    line-height: var(--theme-editor-line-height);
+    font-weight: 500;
+    height: fit-content;
+}
+
+.editor-contents > textarea::selection {
+    background-color: var(--theme-editor-selection-background-color);
 }
 
 .empty-editor {
-    color: white;
+    color: var(--theme-default-font-color);
     text-align: center;
     vertical-align: middle;
+    font-size: 32px;
+}
+
+.bottom {
+    height: 32px;
+    background-color: var(--theme-top-background-color);
+    color: var(--theme-default-font-color);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 8px;
+}
+
+.theme-switch {
+    display: block;
+    background: none;
+    border: 0;
+    padding: 0;
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    color: var(--theme-switcher-color);
+    outline: none;
+    opacity: .5;
+    cursor: pointer;
+    transition: opacity .1s ease-in-out;
+}
+
+.theme-switch:hover {
+    opacity: 1;
+}
+
+.theme-switch:active {
+    opacity: .75;
 }
