@@ -69,6 +69,13 @@ body {
     border-radius: 100%;
 }
 
+.loading-circle {
+    background: url('./img/favicon.png');
+    background-position: center;
+    background-size: 50%;
+    background-repeat: no-repeat;
+}
+
 .loading-circle > path {
     stroke: var(--theme-default-font-color);
     stroke-dasharray: 730;
