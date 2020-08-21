@@ -121,7 +121,7 @@ class App extends React.Component {
                 savingIcon = <span className="saving-icon" />
             }
             // Change the theme switch button icon to Font-Awesome FaSun icon if the current theme is 'dark'
-            if (this.state.currentTheme == "dark") {
+            if (this.state.currentTheme === "dark") {
                 themeBtn = (
                     <button onClick={() => this.onThemeSwitch()} className="theme-switch">
                         <FaSun></FaSun>
