@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/veezoo-assignment-2020/static/css/main.8bbcffdd.chunk.css",
-    "main.js": "/veezoo-assignment-2020/static/js/main.171c217b.chunk.js",
-    "main.js.map": "/veezoo-assignment-2020/static/js/main.171c217b.chunk.js.map",
+    "main.css": "/veezoo-assignment-2020/static/css/main.94f32989.chunk.css",
+    "main.js": "/veezoo-assignment-2020/static/js/main.2dad7596.chunk.js",
+    "main.js.map": "/veezoo-assignment-2020/static/js/main.2dad7596.chunk.js.map",
     "runtime-main.js": "/veezoo-assignment-2020/static/js/runtime-main.e92a2b2f.js",
     "runtime-main.js.map": "/veezoo-assignment-2020/static/js/runtime-main.e92a2b2f.js.map",
     "static/js/2.64172e25.chunk.js": "/veezoo-assignment-2020/static/js/2.64172e25.chunk.js",
     "static/js/2.64172e25.chunk.js.map": "/veezoo-assignment-2020/static/js/2.64172e25.chunk.js.map",
     "index.html": "/veezoo-assignment-2020/index.html",
-    "precache-manifest.4e56594a7a248b2f65816cf7949fbbaa.js": "/veezoo-assignment-2020/precache-manifest.4e56594a7a248b2f65816cf7949fbbaa.js",
+    "precache-manifest.5ce80d7a295f590ec3efc4cd9ab0e6eb.js": "/veezoo-assignment-2020/precache-manifest.5ce80d7a295f590ec3efc4cd9ab0e6eb.js",
     "service-worker.js": "/veezoo-assignment-2020/service-worker.js",
-    "static/css/main.8bbcffdd.chunk.css.map": "/veezoo-assignment-2020/static/css/main.8bbcffdd.chunk.css.map",
+    "static/css/main.94f32989.chunk.css.map": "/veezoo-assignment-2020/static/css/main.94f32989.chunk.css.map",
     "static/js/2.64172e25.chunk.js.LICENSE.txt": "/veezoo-assignment-2020/static/js/2.64172e25.chunk.js.LICENSE.txt",
     "static/media/loading.7e99b4a2.svg": "/veezoo-assignment-2020/static/media/loading.7e99b4a2.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.e92a2b2f.js",
     "static/js/2.64172e25.chunk.js",
-    "static/css/main.8bbcffdd.chunk.css",
-    "static/js/main.171c217b.chunk.js"
+    "static/css/main.94f32989.chunk.css",
+    "static/js/main.2dad7596.chunk.js"
   ]
 }

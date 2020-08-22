@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "0071d1715fd76af30dfd45d6484cc98b",
+    "revision": "39819cf625e89ef1be513a4743e568b4",
     "url": "/veezoo-assignment-2020/index.html"
   },
   {
-    "revision": "74178ef18fa0613a01a4",
-    "url": "/veezoo-assignment-2020/static/css/main.8bbcffdd.chunk.css"
+    "revision": "89bdad6150f3f56b590e",
+    "url": "/veezoo-assignment-2020/static/css/main.94f32989.chunk.css"
   },
   {
     "revision": "15c4fd9d37d37a79a70d",
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/veezoo-assignment-2020/static/js/2.64172e25.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "74178ef18fa0613a01a4",
-    "url": "/veezoo-assignment-2020/static/js/main.171c217b.chunk.js"
+    "revision": "89bdad6150f3f56b590e",
+    "url": "/veezoo-assignment-2020/static/js/main.2dad7596.chunk.js"
   },
   {
     "revision": "c48a2397db34b69900bc",

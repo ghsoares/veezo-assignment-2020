@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/veezoo-assignment-2020/precache-manifest.4e56594a7a248b2f65816cf7949fbbaa.js"
+  "/veezoo-assignment-2020/precache-manifest.5ce80d7a295f590ec3efc4cd9ab0e6eb.js"
 );
 
 self.addEventListener('message', (event) => {
