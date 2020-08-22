@@ -40,6 +40,7 @@ class App extends React.Component {
     }
     // Called when needs to save the file (from the save button or 'CTRL+S' shortcut)
     onFileQuerySave(contents) {
+        if (this.state.deleting) return;
         // If is not passed any parameter, saves the current file
         contents = contents ?? this.editor.state.currentFile;
         // Set this state to render the saving animation
@@ -61,6 +62,7 @@ class App extends React.Component {
     }
     // Called when needs to delete the file (from the delete button)
     onFileQueryDelete() {
+        if (this.state.saving) return;
         // Set this state to render the deleting animation
         this.setState({
             deleting: true
@@ -109,15 +111,25 @@ class App extends React.Component {
             var deleteBtn = (<button className="delete" title="Delete the current open file" disabled><FaTrashAlt /></button>);
             // Icon to show while saving the current opened file
             var savingIcon;
+            // Icon to show while deleting the current opened file
+            var deletingIcon;
             // Button to switch between the themes
             var themeBtn;
             // Change the save and delete button when the current file is opened to a button not disabled
             if (this.editor && this.editor.state.currentFile !== null) {
-                saveBtn = (<button className="save" title="Save the current file (CTRL+S)" onClick={() => this.onFileQuerySave()}><FaSave /></button>);
-                deleteBtn = (<button className="delete" title="Delete the current open file" onClick={() => this.onFileQueryDelete()}><FaTrashAlt /></button>);
+                if (!this.state.deleting && !this.state.saving) {
+                    saveBtn = (<button className="save" title="Save the current file (CTRL+S)" onClick={() => this.onFileQuerySave()}><FaSave /></button>);
+                }
+                if (!this.state.saving && !this.state.deleting) {
+                    deleteBtn = (<button className="delete" title="Delete the current open file" onClick={() => this.onFileQueryDelete()}><FaTrashAlt /></button>);
+                }
+            }
+            // Show the deleting icon if deleting
+            if (this.state.deleting) {
+                deletingIcon = <span className="deleting-icon" />
             }
             // Show the saving icon if saving
-            if (this.state.saving) {
+            else if (this.state.saving) {
                 savingIcon = <span className="saving-icon" />
             }
             // Change the theme switch button icon to Font-Awesome FaSun icon if the current theme is 'dark'
@@ -142,6 +154,7 @@ class App extends React.Component {
                     {deleteBtn}
                     {saveBtn}
                     {savingIcon}
+                    {deletingIcon}
                 </div>
                 <div className="center">
                     <div className="sidebar">

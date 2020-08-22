@@ -172,15 +172,20 @@ body {
     opacity: .75;
 }
 
-.saving-icon {
+.saving-icon, .deleting-icon {
     width: 24px;
     height: 24px;
-    background-color: var(--theme-default-font-color);
+    opacity: 0.5;
+    background-color: var(--theme-save-button-color);
     margin-right: 16px;
-    animation: saving 1s ease-in-out infinite;
+    animation: square-spin 1s ease-in-out infinite;
 }
 
-@keyframes saving {
+.deleting-icon {
+    background-color: var(--theme-delete-button-color);
+}
+
+@keyframes square-spin {
     0%, 50% {
         transform: rotate(0deg);
     }

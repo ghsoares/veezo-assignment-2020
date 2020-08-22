@@ -26,6 +26,8 @@ class TreeItem extends React.Component {
             }));
         // In case this TreeItem 'isDirectory' prop is false, by any means, is a file, handles differently
         } else {
+            // Returns if the current editor opened file is the same as this TreeItem file
+            if (window.mainApp?.editor?.state.currentFile?.id === this.props.file.id) return;
             // Set the state to render the loading animation
             this.setState({
                 loading: true
@@ -105,10 +107,8 @@ class TreeItem extends React.Component {
             }
             // In case a editor is open, the currentFile of the editor is not null and the the id of the file
             // is the same as this TreeItem file id, add a class to this component
-            if (window.mainApp.editor && window.mainApp.editor.state.currentFile) {
-                if (window.mainApp.editor.state.currentFile.id === this.props.file.id) {
-                    className += " currentfile";
-                }
+            if (window.mainApp?.editor?.state.currentFile?.id ===  this.props.file.id) {
+                className += " currentfile";
             }
             // Render this TreeItem
             return (
